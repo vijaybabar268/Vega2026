@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="1.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0" />
@@ -14,6 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\Resources\" />
+    <Folder Include="Mapping\" />
     <Folder Include="Models\" />
     <Folder Include="Persistence\" />
   </ItemGroup>
