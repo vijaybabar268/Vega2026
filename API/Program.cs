@@ -17,9 +17,16 @@ builder.Services.AddDbContext<VegaDbContext>(options =>
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
+builder.Services.AddCors();
+
 
 // Configure the HTTP request pipeline.
 var app = builder.Build();
+
+app.UseCors(p =>
+{
+    p.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200", "https://localhost:4200");
+});
 
 if (app.Environment.IsDevelopment())
 {
