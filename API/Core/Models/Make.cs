@@ -1,9 +1,7 @@
-using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.VisualBasic;
 
-namespace API.Models;
+namespace API.Core.Models;
 
 public class Make
 {

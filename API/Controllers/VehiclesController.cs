@@ -1,11 +1,9 @@
-using System;
-using System.Threading.Tasks;
 using API.Controllers.Resources;
-using API.Models;
-using API.Persistence;
+using API.Core;
+using API.Core.Models;
+using API.Croe;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 

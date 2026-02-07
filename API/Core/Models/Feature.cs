@@ -1,7 +1,6 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace API.Models;
+namespace API.Core.Models;
 
 public class Feature
 {

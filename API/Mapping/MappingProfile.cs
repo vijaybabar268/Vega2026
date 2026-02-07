@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using API.Controllers.Resources;
-using API.Models;
+using API.Core.Models;
 using AutoMapper;
 
 namespace API.Mapping;

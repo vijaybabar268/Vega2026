@@ -1,6 +1,6 @@
 using System;
 
-namespace API.Persistence;
+namespace API.Croe;
 
 public interface IUnitOfWork
 {

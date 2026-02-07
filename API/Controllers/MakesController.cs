@@ -1,11 +1,9 @@
-using System;
-using System.Threading.Tasks;
-using API.Models;
 using API.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using API.Controllers.Resources;
+using API.Core.Models;
 namespace API.Controllers;
 
 public class MakesController : ControllerBase

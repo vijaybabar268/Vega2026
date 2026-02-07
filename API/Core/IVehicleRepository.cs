@@ -1,7 +1,6 @@
-using System;
-using API.Models;
+using API.Core.Models;
 
-namespace API.Persistence;
+namespace API.Core;
 
 public interface IVehicleRepository
 {

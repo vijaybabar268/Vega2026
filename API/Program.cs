@@ -1,5 +1,7 @@
 // Add services to the container.
 using API;
+using API.Core;
+using API.Croe;
 using API.Mapping;
 using API.Persistence;
 using AutoMapper;

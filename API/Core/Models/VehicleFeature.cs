@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace API.Models;
+namespace API.Core.Models;
 
 [Table("VehicleFeatures")]
 public class VehicleFeature

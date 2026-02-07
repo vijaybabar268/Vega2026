@@ -1,6 +1,6 @@
 using System;
 using API.Controllers.Resources;
-using API.Models;
+using API.Core.Models;
 using API.Persistence;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;

@@ -1,5 +1,5 @@
 using System;
-using API.Models;
+using API.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Persistence;
