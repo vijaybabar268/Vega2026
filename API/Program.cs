@@ -19,6 +19,9 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddCors();
 
+builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 
 // Configure the HTTP request pipeline.
 var app = builder.Build();
