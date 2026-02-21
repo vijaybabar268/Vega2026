@@ -40,7 +40,7 @@
     <h2>Features</h2>
     <div *ngFor="let f of features" class="checkbox">
         <label for="feature{{f.id}}">
-            <input type="checkbox" id="feature{{ f.id }}" (change)="onFeatureToggle(f.id, $event)"> {{ f.name }}
+            <input type="checkbox" id="feature{{ f.id }}" (change)="onFeatureToggle(f.id, $event)" [checked]="vehicle.features.includes(f.id)"> {{ f.name }}
         </label>
     </div>
 
@@ -68,4 +68,6 @@
     </div>
 
     <button class="btn btn-info" [disabled]="!f.valid">Save</button>
+    <button *ngIf="vehicle.id" class="btn btn-danger" type="button" (click)="delete()">Delete</button>
+
 </form>

@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {path: 'vehicles/new', component: VehicleFormComponent },
+  {path: 'vehicles/:id', component: VehicleFormComponent },
   {path: 'home', component: HomeComponent}
 ];
 

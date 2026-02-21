@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { VehicleService } from '../services/vehicle.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { forkJoin } from 'rxjs';
+import { SaveVehicle, Vehicle } from '../models/vehicle';
 
 @Component({
   selector: 'app-vehicle-form',
@@ -10,30 +13,94 @@ export class VehicleFormComponent implements OnInit {
   makes:any = [];
   models:any = [];
   features:any = [];
-  vehicle:any = {
+  vehicle: SaveVehicle = {
+    id: 0,
+    makeId: 0,
+    modelId: 0,
+    isRegistered: false,
     features: [],
-    contact: {}
+    contact: {
+      name: '',
+      phone: '',
+      email: ''
+    }
   };
   
   constructor (
-    private vehicleService: VehicleService) {}
+    private route: ActivatedRoute,
+    private router: Router,
+    private vehicleService: VehicleService) {
+      route.params.subscribe(p => {
+        var id = (isNaN(Number(p['id']))) ? 0 : Number(p['id']); 
+        console.log(id);
+        this.vehicle.id = id;
+      })
+    }
 
   ngOnInit(): void {
+    // Multiple requests in parallel
+    var sources = [
+      this.vehicleService.getMakes(),
+      this.vehicleService.getFeatures(),
+    ];
+
+    if (this.vehicle.id) {
+      sources.push(this.vehicleService.getVehicle(this.vehicle.id));
+    }
+
+    forkJoin(
+      sources
+    ).subscribe(data => {
+      this.makes = data[0];
+      this.features = data[1];
+
+      if (this.vehicle.id) {
+        this.setVehicle(data[2] as Vehicle);
+        this.populateModels();
+      }
+    }, err => {
+      if (err.status == 404) {
+        this.router.navigate(['/home']);
+      }
+    });
+
+    // Get vehicle
+    // this.vehicleService.getVehicle(this.vehicle.id).subscribe(v => {
+    //   this.vehicle = v;
+    // }, err => {
+    //   if (err.status == 404) {
+    //     this.router.navigate(['/home']);
+    //   }
+    // });
+
     // Get makes
-    this.vehicleService.getMakes().subscribe(makes => {
-      this.makes = makes;
-    })
+    // this.vehicleService.getMakes().subscribe(makes => {
+    //   this.makes = makes;
+    // })
 
     // Get features
-    this.vehicleService.getFeatures().subscribe(features => {
-      this.features = features;
-    })
+    // this.vehicleService.getFeatures().subscribe(features => {
+    //   this.features = features;
+    // })
+  }
+
+  private setVehicle(v: Vehicle) {
+    this.vehicle.id = v.id;
+    this.vehicle.makeId = v.make.id;
+    this.vehicle.modelId = v.model.id;
+    this.vehicle.isRegistered = v.isRegistered;
+    this.vehicle.contact = v.contact;
+    this.vehicle.features = v.features.map(f => f.id);
   }
 
   onMakeChange() {
+    this.populateModels();
+    this.vehicle.modelId = 0;
+  }
+
+  private populateModels() {
     var selectedMake = this.makes.find((m: any) => m.id == this.vehicle.makeId);
     this.models = selectedMake ? selectedMake.models : [];
-    delete this.vehicle.modelId;
   }
 
   onFeatureToggle(featureId: any, $event: any) {
@@ -46,15 +113,31 @@ export class VehicleFormComponent implements OnInit {
   }
 
   submit() {
-    this.vehicleService.create(this.vehicle).subscribe(
+    var result$ = (this.vehicle.id) ? this.vehicleService.update(this.vehicle) : this.vehicleService.create(this.vehicle); 
+    result$.subscribe(
       x => {
         console.log(x)
-        alert("Created vehicle successfully.");
+        alert("Data was successfully saved.");
+        this.router.navigate(['/vehicles/', this.vehicle.id])
       },
       err => {
         alert("Error while creating vehicle: "+ err);
       }
     );
   }
+
+  delete() {
+    if (confirm("Are you sure?")) {
+      this.vehicleService.delete(this.vehicle.id).subscribe(
+        x => {
+          console.log(x)
+          alert("Deleted vehicle successfully.");
+          this.router.navigate(['/home']);
+        },
+        err => {
+          alert("Error while deleting vehicle: "+ err);
+        }
+      );
+  }}
 
 }
