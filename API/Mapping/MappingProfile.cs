@@ -51,5 +51,7 @@ public class MappingProfile : Profile
                 foreach(var f in addedFeatures)
                     v.Features.Add(f);
             });
+
+        CreateMap<FilterResource, Filter>();
     }
 }

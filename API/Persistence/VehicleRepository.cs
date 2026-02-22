@@ -26,14 +26,19 @@ public class VehicleRepository : IVehicleRepository
             .SingleOrDefaultAsync(v => v.Id == id);
     }
 
-    public async Task<IEnumerable<Vehicle>> GetVehiclesAsync()
+    public async Task<IEnumerable<Vehicle>> GetVehiclesAsync(Filter filter)
     {
-        return await _context.Vehicles
+        var query = _context.Vehicles
             .Include(v => v.Features)
                 .ThenInclude(vf => vf.Feature)
             .Include(v => v.Model)
                 .ThenInclude(m => m.Make)
-            .ToListAsync();
+            .AsQueryable();
+
+        if (filter.MakeId.HasValue)
+            query = query.Where(v => v.Model.MakeId == filter.MakeId.Value);
+
+        return await query.ToListAsync();
     }
 
     public void Add(Vehicle vehicle)
