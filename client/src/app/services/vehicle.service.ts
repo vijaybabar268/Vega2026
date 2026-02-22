@@ -8,7 +8,7 @@ import { SaveVehicle, Vehicle } from '../models/vehicle';
 })
 export class VehicleService {
   private readonly  baseUrl = "https://localhost:5001";
-  private readonly vehiclesEndpoint = '/api/vehicles';
+  private readonly vehiclesEndpoint = 'api/vehicles';
 
   constructor(private http: HttpClient) { }
 

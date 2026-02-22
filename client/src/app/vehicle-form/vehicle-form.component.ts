@@ -25,15 +25,17 @@ export class VehicleFormComponent implements OnInit {
       email: ''
     }
   };
+  title: string = "New";
   
   constructor (
     private route: ActivatedRoute,
     private router: Router,
     private vehicleService: VehicleService) {
       route.params.subscribe(p => {
-        var id = (isNaN(Number(p['id']))) ? 0 : Number(p['id']); 
-        console.log(id);
+        var id = (isNaN(Number(p['id']))) ? 0 : Number(p['id']);
         this.vehicle.id = id;
+
+        this.title = (this.vehicle.id > 0) ? "Edit": "New";
       })
     }
 
@@ -113,31 +115,17 @@ export class VehicleFormComponent implements OnInit {
   }
 
   submit() {
-    var result$ = (this.vehicle.id) ? this.vehicleService.update(this.vehicle) : this.vehicleService.create(this.vehicle); 
+    var result$ = (this.vehicle.id != 0) ? this.vehicleService.update(this.vehicle) : this.vehicleService.create(this.vehicle); 
     result$.subscribe(
       x => {
         console.log(x)
         alert("Data was successfully saved.");
-        this.router.navigate(['/vehicles/', this.vehicle.id])
+        this.router.navigate(['/vehicles']);
       },
       err => {
         alert("Error while creating vehicle: "+ err);
       }
     );
   }
-
-  delete() {
-    if (confirm("Are you sure?")) {
-      this.vehicleService.delete(this.vehicle.id).subscribe(
-        x => {
-          console.log(x)
-          alert("Deleted vehicle successfully.");
-          this.router.navigate(['/home']);
-        },
-        err => {
-          alert("Error while deleting vehicle: "+ err);
-        }
-      );
-  }}
 
 }

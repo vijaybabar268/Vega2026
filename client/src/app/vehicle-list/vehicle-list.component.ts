@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { KeyValuePair, Vehicle } from '../models/vehicle';
 import { VehicleService } from '../services/vehicle.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -13,7 +14,10 @@ export class VehicleListComponent implements OnInit {
   models: KeyValuePair[] = [];
   filter: any = {};
 
-  constructor(private vehicleService: VehicleService) { }
+  constructor(
+    private vehicleService: VehicleService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     this.getMakes();
@@ -40,4 +44,18 @@ export class VehicleListComponent implements OnInit {
     this.filter = {};
     this.onFilterChange();
   }
+
+  delete(id: number) {
+    if (confirm("Are you sure?")) {
+      this.vehicleService.delete(id).subscribe(
+        x => {
+          alert("Deleted vehicle successfully.");
+          this.router.navigate(['/vehicles']);
+        },
+        err => {
+          alert("Error while deleting vehicle: "+ err);
+        }
+      );
+  }}
+
 }
