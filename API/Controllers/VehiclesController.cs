@@ -86,7 +86,7 @@ public class VehiclesController : ControllerBase
         return Ok(vehicleResource);
     }
 
-    [HttpGet]
+    /*[HttpGet]
     public async Task<IActionResult> GetVehicles()
     {
         var vehicles = await _repository.GetVehiclesAsync();
@@ -94,5 +94,13 @@ public class VehiclesController : ControllerBase
         var vehiclesResource = _mapper.Map<IEnumerable<Vehicle>, IEnumerable<VehicleResource>>(vehicles);
 
         return Ok(vehiclesResource);
+    }*/
+
+    [HttpGet]
+    public async Task<IEnumerable<VehicleResource>> GetVehicles()
+    {
+        var vechiles = await _repository.GetVehiclesAsync();
+
+        return _mapper.Map<IEnumerable<Vehicle>, IEnumerable<VehicleResource>>(vechiles);
     }
 }

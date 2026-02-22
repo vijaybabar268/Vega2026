@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
-import { SaveVehicle } from '../models/vehicle';
+import { map, Observable } from 'rxjs';
+import { SaveVehicle, Vehicle } from '../models/vehicle';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +33,16 @@ export class VehicleService {
     return this.http.get(this.baseUrl + '/api/vehicles/' + id).pipe(
       map(res => res)
     )
+  }
+
+  // getVehicles() {
+  //   return this.http.get(this.baseUrl + '/api/vehicles').pipe(
+  //     map((res) => res)
+  //   )
+  // }
+
+  getVehicles(): Observable<Vehicle[]> {
+    return this.http.get<Vehicle[]>(this.baseUrl + '/api/vehicles');
   }
 
   update(vehicle: SaveVehicle) {

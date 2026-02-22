@@ -10,13 +10,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { VehicleService } from './services/vehicle.service';
 import { AppErrorHandler } from './app.error-handler';
+import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VehicleFormComponent,
     NavmenuComponent,
-    HomeComponent
+    HomeComponent,
+    VehicleListComponent
   ],
   imports: [
     BrowserModule,
