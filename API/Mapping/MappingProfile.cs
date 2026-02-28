@@ -52,6 +52,6 @@ public class MappingProfile : Profile
                     v.Features.Add(f);
             });
 
-        CreateMap<FilterResource, Filter>();
+        CreateMap<VehicleQueryResource, VehicleQuery>();
     }
 }

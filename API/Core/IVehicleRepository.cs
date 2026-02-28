@@ -6,7 +6,7 @@ public interface IVehicleRepository
 {
     Task<Vehicle> GetVehicleAsync(int id, bool includeRelated = true);
 
-    Task<IEnumerable<Vehicle>> GetVehiclesAsync(Filter filter);
+    Task<IEnumerable<Vehicle>> GetVehiclesAsync(VehicleQuery queryObj);
 
     void Add(Vehicle vehicle);
 
