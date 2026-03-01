@@ -2,6 +2,7 @@ using System;
 using System.Linq.Expressions;
 using API.Core;
 using API.Core.Models;
+using API.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Persistence;
@@ -53,18 +54,9 @@ public class VehicleRepository : IVehicleRepository
             ["id"] = v => v.Id
         };
 
-        query = ApplyOrdering(queryObj, query, columnsMap);
+        query = query.ApplyOrdering(queryObj, columnsMap);
  
         return await query.ToListAsync();
-    }
-
-    private IQueryable<Vehicle> ApplyOrdering(VehicleQuery queryObj, IQueryable<Vehicle> query, 
-        Dictionary<string, Expression<Func<Vehicle, object>>> columnsMap)
-    {
-        if (queryObj.IsSortAscending)
-            return query.OrderBy(columnsMap[queryObj.SortBy]);
-        else
-            return query.OrderByDescending(columnsMap[queryObj.SortBy]);
     }
 
     public void Add(Vehicle vehicle)
