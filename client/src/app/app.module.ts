@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { VehicleService } from './services/vehicle.service';
 import { AppErrorHandler } from './app.error-handler';
 import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
+import { PaginationComponent } from './shared/pagination.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
     VehicleFormComponent,
     NavmenuComponent,
     HomeComponent,
-    VehicleListComponent
+    VehicleListComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,

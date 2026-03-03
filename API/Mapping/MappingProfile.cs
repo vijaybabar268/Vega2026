@@ -23,6 +23,8 @@ public class MappingProfile : Profile
             .ForMember(vr => vr.Contact, opt => opt.MapFrom(v => new ContactResource { Name = v.ContactName, Phone = v.ContactPhone, Email = v.ContactEmail }))
             .ForMember(vr => vr.Features, opt => opt.MapFrom(v => v.Features.Select(vf => new FeatureResource { Id = vf.Feature.Id, Name = vf.Feature.Name })));
                 
+        CreateMap(typeof(QueryResult<>), typeof(QueryResultResource<>));
+
         // API Resource to Domain
         CreateMap<SaveVehicleResource, Vehicle>()
             .ForMember(v => v.Id, opt => opt.Ignore())
@@ -53,5 +55,6 @@ public class MappingProfile : Profile
             });
 
         CreateMap<VehicleQueryResource, VehicleQuery>();
+
     }
 }
