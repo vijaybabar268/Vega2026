@@ -25,6 +25,8 @@ public class MappingProfile : Profile
                 
         CreateMap(typeof(QueryResult<>), typeof(QueryResultResource<>));
 
+        CreateMap<Photo, PhotoResource>();
+
         // API Resource to Domain
         CreateMap<SaveVehicleResource, Vehicle>()
             .ForMember(v => v.Id, opt => opt.Ignore())

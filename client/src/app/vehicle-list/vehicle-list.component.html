@@ -42,6 +42,7 @@
             <td>{{ v.contact.name }}</td>
             <td>
                 <a class="btn btn-info" [routerLink]="['/vehicles/', v.id]">Edit</a> | 
+                <a class="btn btn-secondary" [routerLink]="['/vehicles/photos/', v.id]">Photos</a> | 
                 <a class="btn btn-primary" (click)="delete(v.id)">Delete</a>
             </td>
         </tr>

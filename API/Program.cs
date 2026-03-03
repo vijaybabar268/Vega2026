@@ -1,6 +1,7 @@
 // Add services to the container.
 using API;
 using API.Core;
+using API.Core.Models;
 using API.Croe;
 using API.Mapping;
 using API.Persistence;
@@ -24,6 +25,7 @@ builder.Services.AddCors();
 builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+builder.Services.Configure<PhotoSettings>(builder.Configuration.GetSection("PhotoSettings"));
 
 // Configure the HTTP request pipeline.
 var app = builder.Build();

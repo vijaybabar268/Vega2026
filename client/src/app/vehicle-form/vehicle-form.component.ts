@@ -119,7 +119,7 @@ export class VehicleFormComponent implements OnInit {
     result$.subscribe(
       x => {
         console.log(x)
-        alert("Data was successfully saved.");
+        // alert("Data was successfully saved.");
         this.router.navigate(['/vehicles']);
       },
       err => {

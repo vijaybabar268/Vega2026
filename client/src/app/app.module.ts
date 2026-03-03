@@ -12,6 +12,7 @@ import { VehicleService } from './services/vehicle.service';
 import { AppErrorHandler } from './app.error-handler';
 import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
 import { PaginationComponent } from './shared/pagination.component';
+import { ViewVehicleComponent } from './view-vehicle/view-vehicle.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PaginationComponent } from './shared/pagination.component';
     NavmenuComponent,
     HomeComponent,
     VehicleListComponent,
-    PaginationComponent
+    PaginationComponent,
+    ViewVehicleComponent
   ],
   imports: [
     BrowserModule,
