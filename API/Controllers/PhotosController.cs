@@ -18,10 +18,12 @@ public class PhotosController : ControllerBase
     private readonly IUnitOfWork unitOfWork;
     private readonly IMapper mapper;
     private readonly PhotoSettings photoSettings;
+    private readonly IPhotoRepository photoRepository;
 
     public PhotosController(IHostEnvironment host, IVehicleRepository repository, 
-        IUnitOfWork unitOfWork, IMapper mapper, IOptionsSnapshot<PhotoSettings> options)
+        IUnitOfWork unitOfWork, IMapper mapper, IOptionsSnapshot<PhotoSettings> options, IPhotoRepository photoRepository)
     {
+        this.photoRepository = photoRepository;
         this.photoSettings = options.Value;
         this.unitOfWork = unitOfWork;
         this.mapper = mapper;
@@ -60,5 +62,13 @@ public class PhotosController : ControllerBase
         await unitOfWork.CompleteAsync();
 
         return Ok(mapper.Map<Photo, PhotoResource>(photo));
+    }
+
+    [HttpGet]
+    public async Task<IEnumerable<PhotoResource>> GetPhotos(int vehicleId)
+    {
+        var photos = await photoRepository.GetPhotos(vehicleId);
+
+        return mapper.Map<IEnumerable<Photo>, IEnumerable<PhotoResource>>(photos);
     }
 }

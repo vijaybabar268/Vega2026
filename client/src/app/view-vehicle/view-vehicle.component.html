@@ -1,1 +1,5 @@
-<p>view-vehicle works!</p>
+<h2>Photos</h2>
+
+<input type="file" (change)="uploadPhoto()" #fileInput>
+<br/>
+<img *ngFor="let photo of photos" src="https://localhost:5001/uploads/{{ photo.fileName }}" height="240" width="240" class="img-thumbnail" />

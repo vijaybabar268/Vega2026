@@ -7,6 +7,7 @@ using API.Mapping;
 using API.Persistence;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -23,6 +24,7 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddCors();
 
 builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
+builder.Services.AddScoped<IPhotoRepository, PhotoRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.Configure<PhotoSettings>(builder.Configuration.GetSection("PhotoSettings"));
@@ -40,6 +42,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseDefaultFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(builder.Environment.ContentRootPath, "uploads")),
+    RequestPath = "/uploads"
+});
 
 app.UseHttpsRedirection();
 

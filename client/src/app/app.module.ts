@@ -13,6 +13,7 @@ import { AppErrorHandler } from './app.error-handler';
 import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
 import { PaginationComponent } from './shared/pagination.component';
 import { ViewVehicleComponent } from './view-vehicle/view-vehicle.component';
+import { PhotoService } from './services/photo.service';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ViewVehicleComponent } from './view-vehicle/view-vehicle.component';
   ],
   providers: [
     VehicleService,
+    PhotoService,
     { provide: ErrorHandler, useClass: AppErrorHandler }
   ],
   bootstrap: [AppComponent]
