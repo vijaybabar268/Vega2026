@@ -3,10 +3,12 @@ using API.Core;
 using API.Core.Models;
 using API.Croe;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
+[Authorize]
 [Route("/api/vehicles")]
 public class VehiclesController : ControllerBase
 {

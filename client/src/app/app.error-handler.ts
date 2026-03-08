@@ -2,7 +2,10 @@ import { ErrorHandler } from "@angular/core";
 
 export class AppErrorHandler implements ErrorHandler {
     handleError(error: any): void {
-        alert("Error: "+ error?.error);
+        if (error.status == 401)
+            alert("Error: Unathorized");
+        else
+            alert("Error: "+ error?.error);
     }
 
 }
