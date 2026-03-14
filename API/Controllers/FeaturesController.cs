@@ -3,6 +3,7 @@ using API.Controllers.Resources;
 using API.Core.Models;
 using API.Persistence;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

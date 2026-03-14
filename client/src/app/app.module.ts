@@ -51,13 +51,6 @@ import { authHttpInterceptorFn, provideAuth0 } from '@auth0/auth0-angular';
     provideHttpClient(
       withInterceptors([authHttpInterceptorFn])
     ),
-    // provideAuth0({
-    //   domain: "dev-8sgea87iqprs34vb.us.auth0.com",
-    //   clientId: "8OGgYVlkO6X9oclV2pLlIjH0whgYnXQ8",
-    //   authorizationParams: {
-    //     redirect_uri: window.location.origin,
-    //   },
-    // }),
     { provide: ErrorHandler, useClass: AppErrorHandler }
   ],
   bootstrap: [AppComponent]
